@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <div class="inputBox">
+        <h2>新規パスワード</h2>
+        <div>
+          <input
+            type="text"
+            placeholder="ランダムに作成されます"
+            readonly=""
+            id="password"
+          />
+          <span class="copy" onclick="copyPassword();"
+            ><ion-icon size="large" name="clipboard-outline"></ion-icon
+          ></span>
+        </div>
+        <div id="btn" onclick="getPassword();">パスワード生成</div>
+      </div>
+      <div class="pasteArea">テスト場所　<input type="text" /></div>
+    </main>
+    <script>
+      var alertBox = document.querySelector(".alertBox");
+      function getPassword() {
+        //文字の素材
+        var chars =
+          "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+?<>:{}[]";
+        // パスワードの長さは16文字
+        var passwordLength = 16;
+        var password = "";
+        for (var i = 0; i < passwordLength; i++) {
+          // charsの中から切り取る文字の場所をrandomNumberとする
+          var randomNumber = Math.floor(Math.random() * chars.length);
+          // passwordにcharsから切り取った文字を右に足していく
+          password += chars.substring(randomNumber, randomNumber + 1);
+        }
+        document.getElementById("password").value = password;
+      }
+
+      function copyPassword() {
+        var copyPassText = document.getElementById("password");
+        copyPassText.select();
+        copyPassText.setSelectionRange(0, 9999);
+        // コピーするコマンド
+        document.execCommand("copy");
+      }
+    </script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
